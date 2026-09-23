@@ -1,6 +1,32 @@
-import Navbar from "../components/Navbar";
-
 const Geral = () => {
+  const test = [
+    {
+      nome: "João",
+      local: "Obra",
+      min: "15",
+      id: 1,
+    },
+    {
+      nome: "Pedro",
+      local: "Casa",
+      min: "10",
+      id: 2,
+    },
+    {
+      nome: "Pedro",
+      local: "Casa",
+      min: "10",
+      id: 3,
+    },
+    {
+      nome: "Pedro",
+      local: "Casa",
+      min: "10",
+      id: 4,
+    },
+  ];
+
+  const max = test.slice(0, 3);
   return (
     <div className="p-7.5">
       <h1 className="text-[#292929] text-[22px] font-bold">Visão Geral</h1>
@@ -35,11 +61,16 @@ const Geral = () => {
           <p>Local</p>
           <p>Situação</p>
         </div>
-        <div className="grid grid-cols-3 pl-3.75 h-12.5 w-full items-center border-b border-[#D2D2D2]">
-          <p>{"Joao"}</p>
-          <p>{"Marilia"}</p>
-          <p>{"Em deslocamento"}</p>
-        </div>
+        {max.map((i) => (
+          <div
+            key={i.id}
+            className="grid grid-cols-3 pl-3.75 h-12.5 w-full items-center border-b border-[#D2D2D2]"
+          >
+            <p>{i.nome}</p>
+            <p>{i.local}</p>
+            <p>{i.min}</p>
+          </div>
+        ))}
       </div>
       <button className="w-28.75 h-8 bg-[#235BC6] text-white text-[14px] rounded-[5px] mt-6.25">
         Abrir mapa

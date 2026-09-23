@@ -1,5 +1,7 @@
+import Modal from "../components/Modal";
+
 const Relatorio = () => {
-  return <div>Relatorio</div>;
+  return <Modal />;
 };
 
 export default Relatorio;

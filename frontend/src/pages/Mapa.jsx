@@ -44,7 +44,7 @@ const Mapa = () => {
           {test.map((i) => (
             <div
               onClick={() => setSelecionado(i.id)}
-              className={`flex items-center w-81.25 h-15 ${selecionado === i.id ? "bg-[#F3F3F3]" : "bg-[#FFFFFF]"}`}
+              className={`flex items-center w-81.25 h-15 ${selecionado === i.id ? "bg-[#F3F3F3]" : "bg-[#FFFFFF]"} cursor-pointer my-1`}
               key={i.id}
             >
               <strong className="bg-[#38875A] w-2 h-2 rounded-full mx-2.5" />

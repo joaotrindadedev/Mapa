@@ -21,7 +21,7 @@ const Maps = () => {
   console.log(posicao);
 
   if (!posicao) {
-    return <p>Teste</p>;
+    return <p>carregando mapa...</p>;
   }
 
   return (
