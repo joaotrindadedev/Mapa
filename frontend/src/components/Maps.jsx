@@ -10,15 +10,14 @@ const Maps = () => {
       (position) => {
         SetPosicao([position.coords.latitude, position.coords.longitude]);
       },
-      (error) => {
-        console.error("Erro ao pegar localização:", error);
+      () => {
+        console.error("Erro ao pegar localização");
       },
     );
   };
   useEffect(() => {
     nav();
   }, [!posicao]);
-  console.log(posicao);
 
   if (!posicao) {
     return <p>carregando mapa...</p>;

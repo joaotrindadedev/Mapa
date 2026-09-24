@@ -4,10 +4,12 @@ import Geral from "../pages/Geral";
 import Mapa from "../pages/Mapa";
 import Funcionarios from "../pages/Funcionarios";
 import Relatorio from "../pages/Relatorio";
+import Login from "../pages/Login";
 
 export default function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<Login />} />
       <Route element={<Layout />}>
         <Route path="/geral" element={<Geral />} />
         <Route path="/mapa" element={<Mapa />} />

@@ -1,6 +1,25 @@
+import { useState } from "react";
 import Input from "./Input";
+import { api } from "../server/api";
 
 const Modal = ({ estado, setEstado }) => {
+  const [nome, setNome] = useState()
+  const [cpf, setCpf] = useState()
+  const [obra, setObra] = useState()
+  const [senha, setSenha] = useState()
+
+  console.log(nome)
+
+  const handleSubmit = () => {
+   api.post("/funcionario",{
+      nome: nome,
+      cpf: cpf,
+      obra: obra,
+      senha: senha,
+    })
+
+  }
+
   return (
     <div
       className={`w-250 bg-white h-100 flex flex-col justify-center items-center rounded-[5px] ${
@@ -35,21 +54,25 @@ const Modal = ({ estado, setEstado }) => {
           label="Nome completo"
           placeholder="Nome e sobrenome"
           type="text"
+          onChange={(i) => setNome(i.target.value)}
         />
 
-        <Input id="cpf" label="CPF" placeholder="000.000.000-00" type="text" />
+        <Input id="cpf" label="CPF" placeholder="000.000.000-00" type="text" onChange={(i) => setCpf(i.target.value)}/>
 
-        <Input id="obra" label="Obra" placeholder="Obra centro" type="text" />
+        <Input id="obra" label="Obra" placeholder="Obra centro" type="text" onChange={(i) => setObra(i.target.value)}/>
 
         <Input
           id="senha"
           label="Senha"
           placeholder="Crie uma senha"
           type="password"
+          onChange={(i) => setSenha(i.target.value)}
         />
 
-        <button className="w-28.75 h-8 bg-[#235BC6] text-white text-[14px] rounded-[5px] cursor-pointer transition active:opacity-80">
-          Cadastrar
+        <button className="w-28.75 h-8 bg-[#235BC6] text-white text-[14px] rounded-[5px] cursor-pointer transition active:opacity-80"
+        onClick={() => handleSubmit()}
+        >
+          Cadastrar 
         </button>
       </div>
     </div>

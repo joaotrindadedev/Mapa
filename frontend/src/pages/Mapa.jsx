@@ -1,25 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Maps from "../components/Maps";
+import { api } from "../server/api";
 
 const Mapa = () => {
   const [selecionado, setSelecionado] = useState();
+  const [funcs, setFuncs] = useState([])
 
-  const test = [
-    {
-      nome: "João",
-      local: "Obra",
-      min: "15",
-      id: 1,
-    },
-    {
-      nome: "Pedro",
-      local: "Casa",
-      min: "10",
-      id: 2,
-    },
-  ];
+  const HandleFuncionario = async () => {
+      const response = await api.get("/funcionario")
+      setFuncs(response.data)
+  }
 
-  const funSelect = test.find((i) => i.id === selecionado);
+  useEffect(() => {
+    HandleFuncionario()
+  }, [])
+
+  const funcionario = funcs.slice(0, 3)
+
+  const funSelect = funcionario.find((i) => i.id === selecionado);
 
   return (
     <div className="p-7.5">
@@ -41,7 +39,7 @@ const Mapa = () => {
           <h2 className="text-[#292929] text-[16px] font-bold mb-4">
             Funcionários
           </h2>
-          {test.map((i) => (
+          {funcionario.map((i) => (
             <div
               onClick={() => setSelecionado(i.id)}
               className={`flex items-center w-81.25 h-15 ${selecionado === i.id ? "bg-[#F3F3F3]" : "bg-[#FFFFFF]"} cursor-pointer my-1`}
@@ -51,7 +49,7 @@ const Mapa = () => {
               <div>
                 <p className="text-[15px] font-bold text-[#292929]">{i.nome}</p>
                 <p className="text-[13px] text-[#6A6A6A]">
-                  {i.local} • {i.min}
+                  {i.obra} • {i.obra}
                 </p>
               </div>
             </div>
@@ -63,8 +61,8 @@ const Mapa = () => {
                 Selecionado: {funSelect.nome}
               </p>
               <p>Local: {funSelect.local}</p>
-              <p>Chegada: {funSelect.min}</p>
-              <p>Tempo no local: {funSelect.min}</p>
+              <p>Chegada: {funSelect.local}</p>
+              <p>Tempo no local: {funSelect.id}</p>
             </div>
           )}
         </div>

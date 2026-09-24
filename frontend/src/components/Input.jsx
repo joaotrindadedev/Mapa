@@ -1,4 +1,4 @@
-const Input = ({ id, label, type, placeholder }) => {
+const Input = ({ id, label, type, placeholder, onChange }) => {
   return (
     <div className="flex flex-col">
       <label htmlFor={id}>{label}</label>
@@ -6,7 +6,8 @@ const Input = ({ id, label, type, placeholder }) => {
         type={type}
         id={id}
         placeholder={placeholder}
-        className={`w-100 h-9 focus:outline-none border border-[#AFAFAF] pl-3`}
+        onChange={onChange}
+        className={`w-100 h-9 focus:outline-none border border-[#AFAFAF] pl-3 rounded-[5px]`}
       />
     </div>
   );

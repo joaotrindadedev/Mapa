@@ -1,0 +1,53 @@
+{
+  "funcionario": [
+    {
+      "nome": "Joao",
+      "cpf": "54959574828",
+      "obra": "Obra Aracaju",
+      "senha": "34512",
+      "id": "8oGhsd_CGmw"
+    },
+    {
+      "nome": "fxdsds",
+      "cpf": "34787326899",
+      "obra": "dsdsdm",
+      "senha": "323231231",
+      "id": "dAQSsq2F12M"
+    },
+    {
+      "nome": "francisco",
+      "cpf": "549",
+      "obra": "Obra jurino",
+      "senha": "1234",
+      "id": "ckWdDr3-y94"
+    },
+    {
+      "nome": "3232",
+      "obra": "3232",
+      "senha": "3232",
+      "id": "4kkwqzE-D2k"
+    },
+    {
+      "nome": "shgqjhsqsbjqh",
+      "cpf": "2365323",
+      "obra": "dsgsd",
+      "senha": "212132",
+      "id": "24u2A5ZI4WA"
+    },
+    {
+      "nome": "fdsd",
+      "cpf": "3243",
+      "obra": "232",
+      "senha": "cdcd",
+      "id": "9hEx1Dc1BvA"
+    },
+    {
+      "nome": "scscs",
+      "cpf": "3232",
+      "obra": "vvdv",
+      "senha": "2323",
+      "id": "OlEY9GY_qp4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
