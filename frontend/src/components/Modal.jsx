@@ -1,24 +1,67 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
 import { api } from "../server/api";
 
 const Modal = ({ estado, setEstado }) => {
-  const [nome, setNome] = useState()
-  const [cpf, setCpf] = useState()
-  const [obra, setObra] = useState()
-  const [senha, setSenha] = useState()
+  const [obras, setObras] = useState([]);
+  const [nome, setNome] = useState();
+  const [cpf, setCpf] = useState();
+  const [obraId, setObraId] = useState("");
+  const [senha, setSenha] = useState();
+  const [messagem, setMessagem] = useState();
 
-  console.log(nome)
+  const BuscarObras = async () => {
+    const response = await api.get("/obras");
+    setObras(response.data);
+  };
 
-  const handleSubmit = () => {
-   api.post("/funcionario",{
-      nome: nome,
-      cpf: cpf,
-      obra: obra,
-      senha: senha,
-    })
+  useEffect(() => {
+    BuscarObras();
+  }, []);
 
-  }
+  const handleSubmit = async () => {
+    if (!nome || !cpf || !obraId || !senha) {
+      setMessagem("Complete as informações!");
+      return;
+    }
+
+    try {
+      // 1. Cadastra o funcionário
+      const response = await api.post("/funcionarios", {
+        nome,
+        cpf,
+        senha,
+        obraId,
+        tipo: "funcionario",
+      });
+
+      // ID que o JSON Server acabou de gerar
+      const funcionarioId = response.data.id;
+
+      // 2. Cria uma localização inicial
+      await api.post("/localizacoes", {
+        funcionarioId,
+        latitude: null,
+        longitude: null,
+        compartilhando: false,
+        atualizadoEm: null,
+      });
+
+      // 3. Se quiser já criar o registro de ponto também
+      await api.post("/pontos", {
+        funcionarioId,
+        obraId,
+        data: null,
+        entrada: null,
+        saida: null,
+      });
+
+      setMessagem("Funcionário cadastrado com sucesso!");
+    } catch (error) {
+      console.log(error);
+      setMessagem("Erro ao cadastrar funcionário.");
+    }
+  };
 
   return (
     <div
@@ -57,10 +100,29 @@ const Modal = ({ estado, setEstado }) => {
           onChange={(i) => setNome(i.target.value)}
         />
 
-        <Input id="cpf" label="CPF" placeholder="000.000.000-00" type="text" onChange={(i) => setCpf(i.target.value)}/>
+        <Input
+          id="cpf"
+          label="CPF"
+          placeholder="000.000.000-00"
+          type="text"
+          onChange={(i) => setCpf(i.target.value)}
+        />
 
-        <Input id="obra" label="Obra" placeholder="Obra centro" type="text" onChange={(i) => setObra(i.target.value)}/>
-
+        <div className="flex flex-col">
+          <label>Obra</label>
+          <select
+            className="w-100 h-9 border border-[#AFAFAF] pl-3 rounded-[5px]"
+            onChange={(e) => setObraId(e.target.value)}
+            defaultValue=""
+            required
+          >
+            {obras.map((obras) => (
+              <option value={obras.id} key={obras.id}>
+                {obras.nome}
+              </option>
+            ))}
+          </select>
+        </div>
         <Input
           id="senha"
           label="Senha"
@@ -69,11 +131,13 @@ const Modal = ({ estado, setEstado }) => {
           onChange={(i) => setSenha(i.target.value)}
         />
 
-        <button className="w-28.75 h-8 bg-[#235BC6] text-white text-[14px] rounded-[5px] cursor-pointer transition active:opacity-80"
-        onClick={() => handleSubmit()}
+        <button
+          className="w-28.75 h-8 bg-[#235BC6] text-white text-[14px] rounded-[5px] cursor-pointer transition active:opacity-80"
+          onClick={() => handleSubmit()}
         >
-          Cadastrar 
+          Cadastrar
         </button>
+        <p className="text-red-600 font-bold">{messagem}</p>
       </div>
     </div>
   );

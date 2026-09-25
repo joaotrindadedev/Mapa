@@ -5,11 +5,13 @@ import Mapa from "../pages/Mapa";
 import Funcionarios from "../pages/Funcionarios";
 import Relatorio from "../pages/Relatorio";
 import Login from "../pages/Login";
+import Home from "../pages/Home";
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
       <Route element={<Layout />}>
         <Route path="/geral" element={<Geral />} />
         <Route path="/mapa" element={<Mapa />} />

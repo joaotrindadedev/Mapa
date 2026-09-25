@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import { api } from "../server/api";
+import { useFuncionarios } from "../hooks/useFuncionarios";
 
 const Funcionarios = () => {
+  const { dados } = useFuncionarios();
   const [estado, setEstado] = useState(false);
-  const [funcs, setFuncs] = useState([])
-
-  const EventFuncionario = async () => {
-    const response = await api.get("/funcionario")
-    setFuncs(response.data)
-  }
-
-  useEffect(() => {
-    EventFuncionario()
-  }, [])
 
   return (
     <div className="p-7.5">
@@ -46,13 +38,13 @@ const Funcionarios = () => {
           <p>Ação</p>
         </div>
 
-      {funcs.map((i) => (
+        {dados.slice(1).map((i) => (
           <div
             key={i.id}
             className="grid grid-cols-4 pl-3.75 h-12.5 w-full items-center border-b border-[#D2D2D2]"
           >
             <p>{i.nome}</p>
-            <p>{i.obra}</p>
+            <p>{i.obra.nome}</p>
             <p>{i.cpf}</p>
 
             <button className="text-[#235BC6] text-[14px] w-[35px] cursor-pointer">
@@ -60,10 +52,9 @@ const Funcionarios = () => {
             </button>
           </div>
         ))}
-        
       </div>
       <p className="text-[#6A6A6A] text-[14px] mt-4">
-        {funcs.length} funcionários cadastrados
+        {dados.slice(1).length} funcionários cadastrados
       </p>
       {estado && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">

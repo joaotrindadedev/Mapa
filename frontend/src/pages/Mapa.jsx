@@ -1,23 +1,14 @@
 import { useEffect, useState } from "react";
 import Maps from "../components/Maps";
 import { api } from "../server/api";
+import { useFuncionarios } from "../hooks/useFuncionarios";
 
 const Mapa = () => {
+  const { dados } = useFuncionarios();
   const [selecionado, setSelecionado] = useState();
-  const [funcs, setFuncs] = useState([])
 
-  const HandleFuncionario = async () => {
-      const response = await api.get("/funcionario")
-      setFuncs(response.data)
-  }
-
-  useEffect(() => {
-    HandleFuncionario()
-  }, [])
-
-  const funcionario = funcs.slice(0, 3)
-
-  const funSelect = funcionario.find((i) => i.id === selecionado);
+  const funcionarios = dados.slice(1, 4);
+  const funSelect = funcionarios.find((i) => i.id === selecionado);
 
   return (
     <div className="p-7.5">
@@ -39,18 +30,21 @@ const Mapa = () => {
           <h2 className="text-[#292929] text-[16px] font-bold mb-4">
             Funcionários
           </h2>
-          {funcionario.map((i) => (
+
+          {funcionarios.map((i) => (
             <div
               onClick={() => setSelecionado(i.id)}
-              className={`flex items-center w-81.25 h-15 ${selecionado === i.id ? "bg-[#F3F3F3]" : "bg-[#FFFFFF]"} cursor-pointer my-1`}
+              className={`flex items-center w-81.25 h-15 ${
+                selecionado === i.id ? "bg-[#F3F3F3]" : "bg-[#FFFFFF]"
+              } cursor-pointer my-1`}
               key={i.id}
             >
               <strong className="bg-[#38875A] w-2 h-2 rounded-full mx-2.5" />
+
               <div>
                 <p className="text-[15px] font-bold text-[#292929]">{i.nome}</p>
-                <p className="text-[13px] text-[#6A6A6A]">
-                  {i.obra} • {i.obra}
-                </p>
+
+                <p className="text-[13px] text-[#6A6A6A]">{i.obra?.nome}</p>
               </div>
             </div>
           ))}
@@ -60,9 +54,9 @@ const Mapa = () => {
               <p className="font-bold text-[#292929] mb-2.5">
                 Selecionado: {funSelect.nome}
               </p>
-              <p>Local: {funSelect.local}</p>
-              <p>Chegada: {funSelect.local}</p>
-              <p>Tempo no local: {funSelect.id}</p>
+              <p>Local: {funSelect.obra?.nome}</p>
+              {/*<p>Chegada: {funSelect.local}</p>
+              <p>Tempo no local: {funSelect.id}</p>*/}
             </div>
           )}
         </div>
