@@ -41,8 +41,8 @@ const Relatorio = () => {
             {console.log(i)}
             <p>{i.nome}</p>
             <p>{i.obra.nome}</p>
-            <p>{i.ponto?.entrada}</p>
-            <p>{i.ponto?.saida}</p>
+            <p>{i.ponto.entrada === null ? "-" : i.ponto.entrada}</p>
+            <p>{i.ponto.saida === null ? "-" : i.ponto.saida}</p>
             <p>{i.id}</p>
           </div>
         ))}

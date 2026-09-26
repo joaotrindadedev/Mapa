@@ -12,16 +12,20 @@ const Login = () => {
   const Logar = async () => {
     try {
       const response = await api.get("/funcionarios");
+
       const usuario = response.data.find(
         (funcionario) =>
           String(funcionario.cpf).trim() === String(cpf).trim() &&
           String(funcionario.senha).trim() === String(senha).trim(),
       );
+
       if (!usuario) {
         alert("CPF ou senha incorretos");
         return;
       }
-      localStorage.setItem("user", JSON.stringify(usuario));
+
+      // Salva o usuário que realmente fez login
+      localStorage.setItem("usuario", JSON.stringify(usuario));
 
       if (usuario.tipo === "admin") {
         navigate("/geral");

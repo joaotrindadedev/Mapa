@@ -1,14 +1,47 @@
 import { useEffect, useState } from "react";
 import Maps from "../components/Maps";
-import { api } from "../server/api";
 import { useFuncionarios } from "../hooks/useFuncionarios";
 
 const Mapa = () => {
   const { dados } = useFuncionarios();
   const [selecionado, setSelecionado] = useState();
+  const [tempo, setTempo] = useState(0);
 
   const funcionarios = dados.slice(1, 4);
   const funSelect = funcionarios.find((i) => i.id === selecionado);
+
+  const calcularTempo = () => {
+    const inicio = new Date(dados.ponto.entrada).getTime();
+
+    const fim = dados.ponto.saida
+      ? new Date(dados.ponto.saida).getTime()
+      : new Date().getTime();
+
+    const diferenca = fim - inicio;
+
+    setTempo(diferenca);
+  };
+
+  useEffect(() => {
+    if (!dados.ponto?.entrada) return;
+    calcularTempo();
+
+    if (dados.ponto?.saida) return;
+
+    const intervalo = setInterval(() => {
+      calcularTempo();
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalo);
+    };
+  }, [dados.ponto?.entrada, dados.ponto?.saida]);
+
+  const segundosTotais = Math.floor(tempo / 1000);
+
+  const horas = Math.floor(segundosTotais / 3600);
+
+  const minutos = Math.floor((segundosTotais % 3600) / 60);
 
   return (
     <div className="p-7.5">
@@ -44,7 +77,10 @@ const Mapa = () => {
               <div>
                 <p className="text-[15px] font-bold text-[#292929]">{i.nome}</p>
 
-                <p className="text-[13px] text-[#6A6A6A]">{i.obra?.nome}</p>
+                <p className="text-[13px] text-[#6A6A6A]">
+                  {i.obra?.nome} •{" "}
+                  {i.localizacao?.compartilhando ? "Online" : "Offline"}
+                </p>
               </div>
             </div>
           ))}
@@ -55,8 +91,15 @@ const Mapa = () => {
                 Selecionado: {funSelect.nome}
               </p>
               <p>Local: {funSelect.obra?.nome}</p>
-              {/*<p>Chegada: {funSelect.local}</p>
-              <p>Tempo no local: {funSelect.id}</p>*/}
+              <p>
+                Chegada:{" "}
+                {funSelect.ponto.entrada === null
+                  ? "---"
+                  : funSelect.ponto.chegada}
+              </p>
+              <p>
+                Tempo no local: {horas}:{minutos}
+              </p>
             </div>
           )}
         </div>

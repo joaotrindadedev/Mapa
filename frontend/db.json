@@ -9,36 +9,12 @@
       "obraId": null
     },
     {
-      "nome": "João Pedro",
-      "cpf": "54959574828",
-      "senha": "32216216",
+      "nome": "Marcos",
+      "cpf": "14573865732",
+      "senha": "123",
       "obraId": "3",
       "tipo": "funcionario",
-      "id": "sBpYinIBmFY"
-    },
-    {
-      "nome": "Caue",
-      "cpf": "22365783661",
-      "senha": "123456",
-      "obraId": "2",
-      "tipo": "funcionario",
-      "id": "QsiYr5g_bTs"
-    },
-    {
-      "nome": "Eduardo",
-      "cpf": "34528466612",
-      "senha": "123456",
-      "obraId": "4",
-      "tipo": "funcionario",
-      "id": "VysO4UxRFAs"
-    },
-    {
-      "nome": "Fran",
-      "cpf": "54973527312",
-      "senha": "123456",
-      "obraId": "2",
-      "tipo": "funcionario",
-      "id": "x29baeqwyvk"
+      "id": "7qlBFSwRlPQ"
     }
   ],
   "obras": [
@@ -65,22 +41,40 @@
   ],
   "pontos": [
     {
-      "id": "1",
-      "funcionarioId": "sBpYinIBmFY",
-      "obraId": "1",
-      "data": "2026-09-24",
-      "entrada": "2026-09-24T08:00:00",
-      "saida": "-"
+      "id": "",
+      "funcionarioId": "",
+      "obraId": "",
+      "data": "",
+      "entrada": "",
+      "saida": "",
+      "tempoTotal": ""
+    },
+    {
+      "funcionarioId": "7qlBFSwRlPQ",
+      "obraId": "3",
+      "data": null,
+      "entrada": null,
+      "saida": null,
+      "tempoTotal": null,
+      "id": "f-i3sGuUQaQ"
     }
   ],
   "localizacoes": [
     {
-      "id": "1",
-      "funcionarioId": "sBpYinIBmFY",
-      "latitude": -22.217,
-      "longitude": -49.95,
-      "compartilhando": true,
-      "atualizadoEm": "2026-09-24T20:30:00"
+      "id": "",
+      "funcionarioId": "",
+      "latitude": null,
+      "longitude": null,
+      "compartilhando": false,
+      "atualizadoEm": null
+    },
+    {
+      "funcionarioId": "7qlBFSwRlPQ",
+      "latitude": null,
+      "longitude": null,
+      "compartilhando": false,
+      "atualizadoEm": null,
+      "id": "xrA4WqwG4A4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

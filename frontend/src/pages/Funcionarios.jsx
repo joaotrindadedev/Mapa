@@ -45,7 +45,7 @@ const Funcionarios = () => {
           >
             <p>{i.nome}</p>
             <p>{i.obra.nome}</p>
-            <p>{i.cpf}</p>
+            <p>{i.localizacao?.compartilhando ? "Online" : "Offline"}</p>
 
             <button className="text-[#235BC6] text-[14px] w-[35px] cursor-pointer">
               Editar

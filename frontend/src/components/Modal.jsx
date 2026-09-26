@@ -54,6 +54,7 @@ const Modal = ({ estado, setEstado }) => {
         data: null,
         entrada: null,
         saida: null,
+        tempoTotal: null,
       });
 
       setMessagem("Funcionário cadastrado com sucesso!");
