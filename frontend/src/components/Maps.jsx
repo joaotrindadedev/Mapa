@@ -1,41 +1,42 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useState } from "react";
-import { api } from "../server/api";
+import { useFuncionarios } from "../hooks/useFuncionarios";
 
 const Maps = () => {
-  const [posicao, SetPosicao] = useState();
-  const nav = async () => {
-    await navigator.geolocation.getCurrentPosition(
-      (position) => {
-        SetPosicao([position.coords.latitude, position.coords.longitude]);
-      },
-      () => {
-        console.error("Erro ao pegar localização");
-      },
-    );
-  };
-  useEffect(() => {
-    nav();
-  }, [!posicao]);
+  const { dados } = useFuncionarios();
 
-  if (!posicao) {
-    return <p>carregando mapa...</p>;
-  }
+  const funcionariosComLocalizacao = dados.filter(
+    (funcionario) =>
+      funcionario.localizacao &&
+      funcionario.localizacao.compartilhando === true &&
+      funcionario.localizacao.latitude != null &&
+      funcionario.localizacao.longitude != null,
+  );
 
   return (
     <MapContainer
-      center={posicao}
-      zoom={13}
+      center={[-22.2040405, -49.9839115]}
+      zoom={11}
       scrollWheelZoom={false}
       className="h-100 w-full border-[#D2D2D2] border"
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={posicao}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+
+      {funcionariosComLocalizacao.map((funcionario) => (
+        <Marker
+          key={funcionario.id}
+          position={[
+            funcionario.localizacao.latitude,
+            funcionario.localizacao.longitude,
+          ]}
+        >
+          <Popup>
+            <strong>{funcionario.nome}</strong>
+            <br />
+            {funcionario.obra?.nome}
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 };

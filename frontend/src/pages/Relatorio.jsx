@@ -38,12 +38,11 @@ const Relatorio = () => {
             key={i.id}
             className="grid grid-cols-5 pl-3.75 h-12.5 w-full items-center border-b border-[#D2D2D2]"
           >
-            {console.log(i)}
             <p>{i.nome}</p>
             <p>{i.obra.nome}</p>
             <p>{i.ponto.entrada === null ? "-" : i.ponto.entrada}</p>
             <p>{i.ponto.saida === null ? "-" : i.ponto.saida}</p>
-            <p>{i.id}</p>
+            <p>{i.ponto.saida - i.ponto.entrada}H</p>
           </div>
         ))}
       </div>

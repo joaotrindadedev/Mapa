@@ -23,7 +23,7 @@ const Geral = () => {
         </div>
         <div className="min-w-50">
           <strong className="text-[#292929] text-[26px] font-bold">
-            {loc.length}
+            {dados.slice(1).length - loc.length}
           </strong>
           <p className="text-[#6A6A6A] text-[14px] mt-1.5">
             Compartilhando localização.
@@ -31,7 +31,7 @@ const Geral = () => {
         </div>
         <div className="min-w-50">
           <strong className="text-[#292929] text-[26px] font-bold">
-            {dados.slice(1).length - loc.length}
+            {loc.length}
           </strong>
           <p className="text-[#6A6A6A] text-[14px] mt-1.5">Sem localização.</p>
         </div>
@@ -52,7 +52,7 @@ const Geral = () => {
             className="grid grid-cols-3 pl-3.75 h-12.5 w-full items-center border-b border-[#D2D2D2]"
           >
             <p>{i.nome}</p>
-            <p>{i.obra.nome}</p>
+            <p>{i.obra.endereco}</p>
             <p>{i.localizacao?.compartilhando ? "Online" : "Offline"}</p>
           </div>
         ))}

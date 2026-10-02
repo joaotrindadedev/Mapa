@@ -7,14 +7,6 @@
       "senha": "123456",
       "tipo": "admin",
       "obraId": null
-    },
-    {
-      "nome": "Marcos",
-      "cpf": "14573865732",
-      "senha": "123",
-      "obraId": "3",
-      "tipo": "funcionario",
-      "id": "7qlBFSwRlPQ"
     }
   ],
   "obras": [
@@ -48,15 +40,6 @@
       "entrada": "",
       "saida": "",
       "tempoTotal": ""
-    },
-    {
-      "funcionarioId": "7qlBFSwRlPQ",
-      "obraId": "3",
-      "data": null,
-      "entrada": null,
-      "saida": null,
-      "tempoTotal": null,
-      "id": "f-i3sGuUQaQ"
     }
   ],
   "localizacoes": [
@@ -67,14 +50,6 @@
       "longitude": null,
       "compartilhando": false,
       "atualizadoEm": null
-    },
-    {
-      "funcionarioId": "7qlBFSwRlPQ",
-      "latitude": null,
-      "longitude": null,
-      "compartilhando": false,
-      "atualizadoEm": null,
-      "id": "xrA4WqwG4A4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

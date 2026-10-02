@@ -33,7 +33,7 @@ const Funcionarios = () => {
       <div>
         <div className="grid grid-cols-4 text-[#292929] text-[14px] font-bold bg-[#F3F3F3] border-[#D2D2D2] border w-full h-10 items-center pl-3.75">
           <p>Funcionário</p>
-          <p>Local</p>
+          <p>Obra</p>
           <p>Situação</p>
           <p>Ação</p>
         </div>
